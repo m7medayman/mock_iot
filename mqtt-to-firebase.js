@@ -113,7 +113,17 @@ setTimeout(() => {
 
 client.on('connect', () => {
     console.log('✅ MQTT Bridge Connected');
-    
+    // Initialize Firebase
+const serviceAccount = require('./firebase-credentials.json');
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: process.env.FIREBASE_DATABASE_URL
+});
+
+const db = admin.firestore();
+const rtdb = admin.database();
+
     // Subscribe to refrigerator topic
     client.subscribe(process.env.MQTT_TOPIC, { qos: 1 }, (err) => {
         if (err) {
@@ -221,7 +231,17 @@ async function logStorageStats() {
         }
         
         console.log('📊 Storage Stats:');
-        console.log(`   RTDB: ${rtdbDeviceCount} devices (latest data only)`);
+        console.log(`   // Initialize Firebase
+const serviceAccount = require('./firebase-credentials.json');
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: process.env.FIREBASE_DATABASE_URL
+});
+
+const db = admin.firestore();
+const rtdb = admin.database();
+RTDB: ${rtdbDeviceCount} devices (latest data only)`);
         console.log(`   Firestore: ${devicesSnapshot.size} devices, ~${totalFirestoreRecords} history records`);
         console.log(`   Spark Plan Limits: 20k writes/day, 50k reads/day, 1GB storage\n`);
     } catch (error) {

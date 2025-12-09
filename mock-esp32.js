@@ -23,6 +23,7 @@ client.on('connect', () => {
     
     // Publish data every 5 seconds
     setInterval(() => {
+        
         const data = generateSensorData();
         const payload = JSON.stringify(data);
         
@@ -53,9 +54,12 @@ client.on('reconnect', () => {
     console.log('🔄 Reconnecting to MQTT Broker...');
 });
 
-function generateSensorData() {
+
+function generateSensorData(
+    id='FRIDGE_001',
+) {
     return {
-        deviceId: 'FRIDGE_001',
+        deviceId: id,
         temperature: (Math.random() * 6 + 2).toFixed(2), // 2-8°C
         humidity: (Math.random() * 20 + 40).toFixed(2),  // 40-60%
         doorStatus: Math.random() > 0.7 ? 'open' : 'closed',
