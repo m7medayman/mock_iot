@@ -168,6 +168,7 @@ client.on('message', async (topic, message) => {
                     temperature: data.temperature,
                     doorStatus: data.doorStatus,
                     timestamp: data.timestamp,
+                    name: data.name,
                     lastUpdated: admin.firestore.FieldValue.serverTimestamp()
                 }, { merge: true }),
             
@@ -179,6 +180,7 @@ client.on('message', async (topic, message) => {
                     temperature: data.temperature,
                     doorStatus: data.doorStatus,
                     timestamp: data.timestamp,
+                    name: data.name,
                     savedAt: admin.firestore.FieldValue.serverTimestamp()
                 })
         ];
